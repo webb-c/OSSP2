@@ -14,9 +14,10 @@ def get_number():
         file.writelines(lines) 
     return number
 
-def is_stable(pre_table, table):
-    flag = False
-    return flag
+def is_stable(prev_table, next_table):
+    prev_table = np.asarray(prev_table)
+    next_table = np.asarray(next_table)
+    return np.all(np.abs(next_table - prev_table) <= 1e-4)
 
 def value_iteration():
     global env, agent, gamma, episode
