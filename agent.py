@@ -35,9 +35,9 @@ class Agent():
         
     def save_table(self):
         with open(self.csv_path, 'a+', newline='') as csv_file: 
-            csv_writer = csv.writer(csvfile)
-        for item in self.table:
-            csv_writer.writerow([item])
+            csv_writer = csv.writer(csv_file)
+            for item in self.table:
+                csv_writer.writerow([item])
     
     def reset(self):
         self.table = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]

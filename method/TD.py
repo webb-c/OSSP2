@@ -5,18 +5,19 @@ from agent import Agent
 
 
 def get_number(n):
-    if n = 1 :
+    number = 0
+    if n == 1 :
         idx = 2
     else :
         idx = 3
     with open('number.txt', 'r') as file:
-        for i, line in enumerate(file):
-            if i == idx:  
-                number = int(line.strip())
-                break
+        lines = file.readlines()
+    number = int(lines[idx],strip())
+    lines[idx] = str(number+1) + '\n'
     with open('number.txt', 'w') as file:
-        file.write(str(number+1)) 
+        file.writelines(lines) 
     return number
+
 
 def train_td(method, n, eps, gamma, alpha):
     env = GridWorld()

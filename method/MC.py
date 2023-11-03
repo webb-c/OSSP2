@@ -5,14 +5,15 @@ from agent import Agent
 
 
 def get_number():
+    number = 0
     with open('number.txt', 'r') as file:
-        for i, line in enumerate(file):
-            if i == 1:  
-                number = int(line.strip())
-                break
+        lines = file.readlines()
+    number = int(lines[1],strip())
+    lines[1] = str(number+1) + '\n'
     with open('number.txt', 'w') as file:
-        file.write(str(number+1)) 
+        file.writelines(lines) 
     return number
+
 
 def train_mc(method, eps, gamma, alpha):
     env = GridWorld()
