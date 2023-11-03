@@ -4,12 +4,12 @@ from environment import GridWorld
 from agent import Agent
 
 
-def train_mc(method, eps):
+def train_mc(method, eps, gamma, alpha):
     env = GridWorld()
     agent = Agent(method, num)
-    gamma = 1.0
     reward = -1
-    alpha = 0.001
+    gamma = gamma
+    alpha = alpha
 
     for k in range(50000):
         done = False
@@ -27,8 +27,6 @@ def train_mc(method, eps):
             data[x][y] = data[x][y] + alpha*(cum_reward-data[x][y])
             cum_reward = reward + gamma*cum_reward
 
-    for row in data:
-        print(row)
 
 
 if __name__ == '__main__':

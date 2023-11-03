@@ -3,13 +3,12 @@ import numpy as np
 from environment import GridWorld
 
 
-def train_dp(method, eps):
+def train_dp(method, eps, gamma, alpha):
     env = GridWorld()
     agent = Agent(method, num)
-    data = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-    gamma = 1.0
     reward = -1
-    alpha = 0.001
+    gamma = gamma
+    alpha = alpha
 
     for k in range(50000):
         done = False
