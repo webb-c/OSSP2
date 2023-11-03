@@ -21,7 +21,7 @@ def train_mc(method, eps, gamma, alpha):
     gamma = gamma
     alpha = alpha
 
-    for i in tqdm(range(98)) :
+    for i in tqdm(range(100)) :
         agent = Agent(method, get_number())
         for k in tqdm(range(eps), desc="training... "):
             done = False

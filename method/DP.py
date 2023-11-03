@@ -14,21 +14,111 @@ def get_number():
         file.writelines(lines) 
     return number
 
+def is_stable(pre_table, table):
+    flag = False
+    return flag
 
-def train_dp(method, eps, gamma, alpha):
+def value_iteration():
+    global env, agent, gamma, episode
+    i = 0
+    while True :
+        prev_table = agent.get_table()
+        next_table = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+        for x in range(4) :
+            for y in range(4) :
+                if x == 3 and y == 3:
+                    next_table[x][y] = 0.0
+                    continue 
+                value_list = []
+                for action in range(4):
+                    env.set_state(x, y)
+                    (x_prime, y_prime), reward, done = env.step(action)
+                    next_value = prev_table[x_prime][y_prime]
+                    value_list.append((reward + gamma * next_value))
+                next_table[x][y] = max(value_list)
+        agent.set_table(next_table)
+        next_table = agent.get_table()
+        agent.save_table()
+        if is_stable(prev_table, next_table) or i >= episode :
+            break
+        i += 1
+
+def policy_iteration():
+    global episode
+    policy = [[[0.25, 0.25, 0.25, 0.25]] * 4 for _ in range(4)]
+    i = 0
+    while True :
+        prev_table = agent.get_table()
+        policy_evaluation(policy)
+        policy = policy_improvement(policy)
+        next_table = agent.get_table()
+        agent.save_table()
+        if is_stable(prev_table, next_table) or i >= episode:
+            break
+        i += 1
+
+def policy_evaluation(policy):
+    global env, agent, gamma
+    prev_table = agent.get_table()
+    next_table = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    for x in range(4) :
+        for y in range(4) :
+            if x == 3 and y == 3:
+                next_table[x][y] = 0.0
+                continue 
+            value = 0.0
+            for action in range(4):
+                env.set_state(x, y)
+                (x_prime, y_prime), reward, done = env.step(action)
+                next_value = prev_table[x_prime][y_prime]
+                value += policy[x][y][action] * (reward + gamma * next_value)
+            next_table[x][y] = value
+    agent.set_table(next_table)
+    return next_table
+    
+def policy_improvement(policy):
+    global env, agent, gamma
+    next_policy = policy
+    table = agent.get_table()
+    for x in range(4) :
+        for y in range(4) :
+            if x == 3 and y == 3:
+                continue 
+            best_value = -99999999
+            max_index = []
+            result = [0.0, 0.0, 0.0, 0.0]
+            for action in range(4):
+                env.set_state(x, y)
+                (x_prime, y_prime), reward, done = env.step(action)
+                next_value = table[x_prime][y_prime]
+                temp = reward + gamma * next_value
+                if temp == best_value:
+                    max_index.append(action)
+                elif temp > best_value:
+                    best_value = temp
+                    max_index = [action]
+            prob = 1 / len(max_index)
+            for index in max_index:
+                result[index] = prob
+            next_policy[x][y] = result
+    return policy
+            
+            
+def train_dp(method, sub, eps, g):
+    print("test")
+    global env, agent
+    global gamma, episode
     env = GridWorld()
-    agent = Agent(method, num)
-    reward = -1
-    gamma = gamma
-    alpha = alpha
+    agent = Agent(method, get_number())
+    gamma, episode = g, eps
+    
+    if sub == "v" :
+        value_iteration()
+    elif sub == "p" :
+        policy_iteration()
+    else :
+        print("wrong args :", sub)
+        return
 
-    for k in tqdm(range(eps), desc="training... "):
-        print()
-        # DP implementation        
-
-    agent.save_table()
     agent.print_table()
-
-
-if __name__ == '__main__':
-    main()
+    agent.save_table()

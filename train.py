@@ -3,7 +3,7 @@
 python train.py {args}
 
 examples
-- python train.py -m DP -ne 100
+- python train.py -m DP -ne 100 -s p
 - python train.py -m MC -ne 1000
 - python train.py -m TD -n 3 -ne 1000
 
@@ -33,6 +33,7 @@ def parge_opt(known=False):
     parser.add_argument("-n", "--nstep", type=int, default=1, help="n-step TD")
     parser.add_argument("-ne", "--episode", type=int, default=100, help="Number of Episodes")
     # additional args
+    parser.add_argument("-s", "--sub", type=str, default="v", help="DP method (p, v)")
     parser.add_argument("-g", "--gamma", type=float, default=1.0, help="Gamma")
     parser.add_argument("-a", "--alpha", type=float, default=0.001, help="alpha")
     return parser.parse_known_args()[0] if known else parser.parse_args()
@@ -43,9 +44,10 @@ def main(opt):
     if opt.learningMethod not in ["DP", "TD", "MC"]:
         print("Invalid argument input :", opt.learningMethod)
         return "Training Fail ..."
+    # start training
     elif opt.learningMethod == "DP":
         print("Training Start DP with {} episode".format(opt.episode))
-        train_dp(opt.learningMethod, opt.episode, opt.gamma, opt.alpha)
+        train_dp(opt.learningMethod, opt.sub, opt.episode, opt.gamma)
     elif opt.learningMethod == "MC":
         print("Training Start MC with {} episode".format(opt.episode))
         train_mc(opt.learningMethod, opt.episode, opt.gamma, opt.alpha)

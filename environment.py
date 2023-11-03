@@ -41,6 +41,10 @@ class GridWorld():
 
     def get_state(self):
         return (self.x, self.y)
+
+    def set_state(self, x, y):
+        self.x = x
+        self.y = y
     
     def reset(self):
         self.x = 0
