@@ -17,32 +17,29 @@ def get_number():
 
 def train_mc(method, eps, gamma, alpha):
     env = GridWorld()
-    agent = Agent(method, get_number())
     reward = -1
     gamma = gamma
     alpha = alpha
 
-    for k in tqdm(range(eps), desc="training... "):
-        done = False
-        history = []
+    for i in tqdm(range(98)) :
+        agent = Agent(method, get_number())
+        for k in tqdm(range(eps), desc="training... "):
+            done = False
+            history = []
 
-        while not done:
-            action = agent.select_action()
-            (x, y), reward, done = env.step(action)
-            history.append((x, y, reward))
-        env.reset()
+            while not done:
+                action = agent.select_action()
+                (x, y), reward, done = env.step(action)
+                history.append((x, y, reward))
+            env.reset()
 
-        # table update
-        temp_table = agent.get_table()
-        cum_reward = 0
-        for transition in history[::-1]:
-            x, y, reward = transition
-            temp_table[x][y] = temp_table[x][y] + alpha*(cum_reward-temp_table[x][y])
-            cum_reward = reward + gamma*cum_reward
-        agent.set_table(temp_table)
-        agent.save_table()
-    agent.print_table()
-
-
-if __name__ == '__main__':
-    main()
+            # table update
+            temp_table = agent.get_table()
+            cum_reward = 0
+            for transition in history[::-1]:
+                x, y, reward = transition
+                temp_table[x][y] = temp_table[x][y] + alpha*(cum_reward-temp_table[x][y])
+                cum_reward = reward + gamma*cum_reward
+            agent.set_table(temp_table)
+            agent.save_table()
+        agent.print_table()
