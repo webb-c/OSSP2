@@ -30,7 +30,7 @@ class Agent():
     def print_table(self):
         for row in self.table:
             for v in row :
-                print(v, end="\t")
+                print(round(v, 3), end="\t")
             print()
         
     def save_table(self):

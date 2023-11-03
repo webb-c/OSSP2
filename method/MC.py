@@ -2,7 +2,7 @@ import random
 import numpy as np
 from environment import GridWorld
 from agent import Agent
-
+from tqdm import tqdm
 
 def get_number():
     number = 0
@@ -22,7 +22,7 @@ def train_mc(method, eps, gamma, alpha):
     gamma = gamma
     alpha = alpha
 
-    for k in range(eps):
+    for k in tqdm(range(eps), desc="training... "):
         done = False
         history = []
 
@@ -40,10 +40,8 @@ def train_mc(method, eps, gamma, alpha):
             temp_table[x][y] = temp_table[x][y] + alpha*(cum_reward-temp_table[x][y])
             cum_reward = reward + gamma*cum_reward
         agent.set_table(temp_table)
-        if k % (eps//10) == 0 :
-            agent.print_table()
         agent.save_table()
-        agent.reset()
+    agent.print_table()
 
 
 if __name__ == '__main__':

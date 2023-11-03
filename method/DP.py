@@ -2,7 +2,7 @@ import random
 import numpy as np
 from environment import GridWorld
 from agent import Agent
-
+from tqdm import tqdm
 
 def get_number():
     number = 0
@@ -22,11 +22,12 @@ def train_dp(method, eps, gamma, alpha):
     gamma = gamma
     alpha = alpha
 
-    for k in range(eps):
+    for k in tqdm(range(eps), desc="training... "):
         print()
         # DP implementation        
 
     agent.save_table()
+    agent.print_table()
 
 
 if __name__ == '__main__':
