@@ -113,13 +113,22 @@ def train_dp(method, sub, eps, g):
     agent = Agent(method, get_number())
     gamma, episode = g, eps
     
-    if sub == "v" :
-        value_iteration()
-    elif sub == "p" :
-        policy_iteration()
-    else :
-        print("wrong args :", sub)
-        return
-
+    """ optimal value implementation
+    # if sub == "v" :
+    #     value_iteration()
+    # elif sub == "p" :
+    #     policy_iteration()
+    #    else :
+    #    print("wrong args :", sub)
+    #    return """
+    
+    i = 0
+    policy = [[[0.25, 0.25, 0.25, 0.25]] * 4 for _ in range(4)]
+    while True :
+        prev_table = agent.get_table()
+        next_table = policy_evaluation(policy)
+        if is_stable(prev_table, next_table) or i >= episode:
+            break
+        i += 1
     agent.print_table()
     agent.save_table()
