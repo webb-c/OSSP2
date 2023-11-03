@@ -4,9 +4,19 @@ from environment import GridWorld
 from agent import Agent
 
 
+def get_number():
+    with open('number.txt', 'r') as file:
+        for i, line in enumerate(file):
+            if i == 1:  
+                number = int(line.strip())
+                break
+    with open('number.txt', 'w') as file:
+        file.write(str(number+1)) 
+    return number
+
 def train_mc(method, eps, gamma, alpha):
     env = GridWorld()
-    agent = Agent(method, num)
+    agent = Agent(method, get_number())
     reward = -1
     gamma = gamma
     alpha = alpha
@@ -29,6 +39,8 @@ def train_mc(method, eps, gamma, alpha):
             temp_table[x][y] = temp_table[x][y] + alpha*(cum_reward-temp_table[x][y])
             cum_reward = reward + gamma*cum_reward
         agent.set_table(temp_table)
+        if k % (eps//10) == 0 :
+            agent.print_table()
         agent.save_table()
         agent.reset()
 

@@ -22,7 +22,7 @@ class Agent():
         return action
 
     def get_table(self):
-        retutn self.table
+        return self.table
     
     def set_table(self, table):
         self.table = table
@@ -30,8 +30,8 @@ class Agent():
     def print_table(self):
         for row in self.table:
             for v in row :
-            print(v, end="\t")
-        print()
+                print(v, end="\t")
+            print()
         
     def save_table(self):
         with open(self.csv_path, 'a+', newline='') as csv_file: 
