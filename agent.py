@@ -6,7 +6,7 @@ class Agent():
     def __init__(self, method, num):
         self.method = method
         self.num = num
-        self.csvfile = "results/csv/{}-{}.csv".format(self.method, self.num)
+        self.csv_path = "results/csv/{}-{}.csv".format(self.method, self.num)
         self.table = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
     def select_action(self):
@@ -21,7 +21,11 @@ class Agent():
             action = 3
         return action
 
-    def update_table(self):
+    def get_table(self):
+        retutn self.table
+    
+    def set_table(self, table):
+        self.table = table
     
     def print_table(self):
         for row in self.table:
@@ -30,8 +34,10 @@ class Agent():
         print()
         
     def save_table(self):
-        csvfile = self.csvfile
-        with open(csv_file_path, 'a+', newline='') as csvfile: 
+        with open(self.csv_path, 'a+', newline='') as csv_file: 
             csv_writer = csv.writer(csvfile)
         for item in self.table:
             csv_writer.writerow([item])
+    
+    def reset(self):
+        self.table = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]

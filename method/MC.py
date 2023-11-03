@@ -11,7 +11,7 @@ def train_mc(method, eps, gamma, alpha):
     gamma = gamma
     alpha = alpha
 
-    for k in range(50000):
+    for k in range(eps):
         done = False
         history = []
 
@@ -21,12 +21,16 @@ def train_mc(method, eps, gamma, alpha):
             history.append((x, y, reward))
         env.reset()
 
+        # table update
+        temp_table = agent.get_table()
         cum_reward = 0
         for transition in history[::-1]:
             x, y, reward = transition
-            data[x][y] = data[x][y] + alpha*(cum_reward-data[x][y])
+            temp_table[x][y] = temp_table[x][y] + alpha*(cum_reward-temp_table[x][y])
             cum_reward = reward + gamma*cum_reward
-
+        agent.set_table(temp_table)
+        agent.save_table()
+        agent.reset()
 
 
 if __name__ == '__main__':
