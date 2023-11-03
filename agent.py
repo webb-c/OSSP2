@@ -34,10 +34,10 @@ class Agent():
             print()
         
     def save_table(self):
+        flat_data = [item for sublist in self.table for item in sublist]
         with open(self.csv_path, 'a+', newline='') as csv_file: 
             csv_writer = csv.writer(csv_file)
-            for item in self.table:
-                csv_writer.writerow([item])
+            csv_writer.writerow(flat_data)
     
     def reset(self):
         self.table = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
