@@ -127,8 +127,8 @@ def train_dp(method, sub, eps, g):
     while True :
         prev_table = agent.get_table()
         next_table = policy_evaluation(policy)
+        agent.save_table()
         if is_stable(prev_table, next_table) or i >= episode:
             break
         i += 1
     agent.print_table()
-    agent.save_table()
