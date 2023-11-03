@@ -8,7 +8,7 @@ def get_number():
     number = 0
     with open('number.txt', 'r') as file:
         lines = file.readlines()
-    number = int(lines[1],strip())
+    number = int(lines[1].strip())
     lines[1] = str(number+1) + '\n'
     with open('number.txt', 'w') as file:
         file.writelines(lines) 

@@ -12,7 +12,7 @@ def get_number(n):
         idx = 3
     with open('number.txt', 'r') as file:
         lines = file.readlines()
-    number = int(lines[idx],strip())
+    number = int(lines[idx].strip())
     lines[idx] = str(number+1) + '\n'
     with open('number.txt', 'w') as file:
         file.writelines(lines) 
