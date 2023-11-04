@@ -29,7 +29,10 @@ def train_td(method, n, eps, gamma, alpha):
     for i in tqdm(range(1)) :
         if n == 1 or n == 3 :
             number = get_number(n)
-        agent = Agent("{}-step TD".format(n), number)
+            agent = Agent("{}-step TD".format(n), number)
+        else :
+            number = -1
+            agent = Agent("{}-step TD".format(n), number)
         for k in tqdm(range(eps), desc="training... "):
             done = False
             history = []

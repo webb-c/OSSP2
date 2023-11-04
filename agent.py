@@ -6,7 +6,10 @@ class Agent():
     def __init__(self, method, num):
         self.method = method
         self.num = num
-        self.csv_path = "results/csv/{}/{}.csv".format(self.method, self.num)
+        if self.num == -1 :
+            self.csv_path = "results/csv/n-step TD/{}.csv".format(self.method)
+        else :
+            self.csv_path = "results/csv/{}/{}.csv".format(self.method, self.num)
         self.table = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
     def select_action(self):
