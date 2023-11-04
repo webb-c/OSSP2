@@ -73,6 +73,6 @@ python train.py -m DP -ne 100
 python train.py -m MC -ne 10000
 
 # n-step TD 
-python train.py -m TD -n 1 -ne 10000
-python train.py -m TD -n 3 -ne 10000
+python train.py -m TD -n 1 -ne 10000 -a 0.01
+python train.py -m TD -n 3 -ne 10000 -a 0.01
 ```
