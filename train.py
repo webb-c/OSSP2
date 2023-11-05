@@ -3,9 +3,9 @@
 python train.py {args}
 
 examples
-- python train.py -m DP -ne 100 -s p
+- python train.py -m DP -ne 100
 - python train.py -m MC -ne 1000
-- python train.py -m TD -n 3 -ne 1000
+- python train.py -m TD -n 3 -ne 10000 -a 0.01
 
 """
 
@@ -31,7 +31,7 @@ def parge_opt(known=False):
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--learningMethod", type=str, default="DP", help="rearning method (DP, TD, MC)")
     parser.add_argument("-n", "--nstep", type=int, default=1, help="n-step TD")
-    parser.add_argument("-ne", "--episode", type=int, default=100, help="Number of Episodes")
+    parser.add_argument("-ne", "--episode", type=int, default=1000, help="Number of Episodes")
     # additional args
     parser.add_argument("-s", "--sub", type=str, default="v", help="DP method (p, v)")
     parser.add_argument("-g", "--gamma", type=float, default=1.0, help="gamma")
