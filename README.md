@@ -45,7 +45,7 @@
 ### 코드 구조 설명
 - train.py : 인자로 learning method(`-m`), episode 횟수(`-ne`)를 전달하면 그 방법대로 학습하는 코드
 - agent.py : random policy를 기반으로 action을 랜덤하게 결정하는 에이전트. value table을 가짐.
-- environment.py : 4x4 Gid World, action을 따라 실제로 step을 진행하는 환경. ([Reference](https://github.com/seungeunrho/RLfrombasics))
+- environment.py : 4x4 Grid World, action을 따라 실제로 step을 진행하는 환경. ([Reference](https://github.com/seungeunrho/RLfrombasics))
 - method/
     - DP.py : policy evalution을 통해 value function을 계산 (=정답)
     - MC.py : MC learning을 통해 value function을 계산
