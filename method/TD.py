@@ -19,14 +19,17 @@ def get_number(n):
     return number
 
 
-def train_td(method, n, eps, gamma, alpha):
+def train_td(method, n, eps, gamma, alpha, isRepeat, isSave):
     env = GridWorld()
     number = 0
     reward = -1
     gamma = gamma
     alpha = alpha
-
-    for i in tqdm(range(1)) :
+    count = 1
+    if isRepeat :
+        count = 100
+    
+    for _ in range(count) :
         if n == 1 or n == 3 :
             number = get_number(n)
             agent = Agent("{}-step TD".format(n), number)
@@ -50,14 +53,13 @@ def train_td(method, n, eps, gamma, alpha):
                     x_n, y_n, _ = history.pop(0)
                     temp_table[x_n][y_n] += alpha * (target - temp_table[x_n][y_n])
                     agent.set_table(temp_table)
-                x, y = x_prime, y_prime
-            
+                x, y = x_prime, y_prime        
             while history:
                 temp_table = agent.get_table()
                 target = sum([gamma ** i * history[i][2] for i in range(len(history))])
                 x_n, y_n, _ = history.pop(0)
                 temp_table[x_n][y_n] += alpha * (target - temp_table[x_n][y_n])
                 agent.set_table(temp_table)
-                
-            agent.save_table()
+            if isSave :
+                agent.save_table()
         agent.print_table()

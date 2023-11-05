@@ -15,13 +15,16 @@ def get_number():
     return number
 
 
-def train_mc(method, eps, gamma, alpha):
+def train_mc(method, eps, gamma, alpha, isRepeat, isSave):
     env = GridWorld()
     reward = -1
     gamma = gamma
     alpha = alpha
-
-    for i in tqdm(range(100)) :
+    count = 1
+    if isRepeat :
+        count = 100
+    
+    for _ in range(count) :
         agent = Agent(method, get_number())
         for k in tqdm(range(eps), desc="training... "):
             done = False
@@ -41,5 +44,6 @@ def train_mc(method, eps, gamma, alpha):
                 temp_table[x][y] = temp_table[x][y] + alpha*(cum_reward-temp_table[x][y])
                 cum_reward = reward + gamma*cum_reward
             agent.set_table(temp_table)
-            agent.save_table()
+            if isSave :
+                agent.save_table()
         agent.print_table()

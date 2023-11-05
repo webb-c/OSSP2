@@ -105,30 +105,25 @@ def policy_improvement(policy):
     return policy
             
             
-def train_dp(method, sub, eps, g):
-    print("test")
+def train_dp(method, sub, eps, g, isRepeat, isSave):
     global env, agent
     global gamma, episode
     env = GridWorld()
-    agent = Agent(method, get_number())
     gamma, episode = g, eps
+    count = 1
+    if isRepeat :
+        count = 100
     
-    """ optimal value implementation
-    # if sub == "v" :
-    #     value_iteration()
-    # elif sub == "p" :
-    #     policy_iteration()
-    #    else :
-    #    print("wrong args :", sub)
-    #    return """
-    
-    i = 0
-    policy = [[[0.25, 0.25, 0.25, 0.25]] * 4 for _ in range(4)]
-    while True :
-        prev_table = agent.get_table()
-        next_table = policy_evaluation(policy)
-        agent.save_table()
-        if is_stable(prev_table, next_table) or i >= episode:
-            break
-        i += 1
-    agent.print_table()
+    for _ in range(count):
+        agent = Agent(method, get_number())
+        i = 0
+        policy = [[[0.25, 0.25, 0.25, 0.25]] * 4 for _ in range(4)]
+        while True :
+            prev_table = agent.get_table()
+            next_table = policy_evaluation(policy)
+            if isSave :
+                agent.save_table()
+            if is_stable(prev_table, next_table) or i >= episode:
+                break
+            i += 1
+        agent.print_table()
