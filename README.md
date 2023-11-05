@@ -59,7 +59,7 @@ git clone https://github.com/webb-c/OSSP2.git
 
 ### 요구 라이브러리 설치
 단, requirement.txt는 @webb-c가 사용한 가상환경에 설치된 라이브러리 버전으로, 이 버전보다 더 높거나 낮아도 호환될 가능성이 높습니다.  
-또한 해당 requirement.txt에서는 `analysis.ipynb`를 실행하는데 필요로하는 라이브러리의 버전을 명시되어있지 않습니다. ipynb에 출력된 각 라이브러리의 버전을 확인하고 맞는 버전을 다운로드하길 바랍니다.
+또한 해당 requirement.txt에서는 `analysis.ipynb`를 실행하는데 필요로하는 라이브러리의 버전을 명시되어있지 않습니다. ipynb에 출력된 각 라이브러리의 버전을 확인하고 맞는 버전을 다운로드하시길 바랍니다.
 ```bash
 pip install -r requirement.txt
 ```
