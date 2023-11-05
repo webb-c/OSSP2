@@ -5,7 +5,7 @@
 
 # 요구사항
 
-### [DP] Dynamic Planning for 4x4 Gid World
+### [DP] Dynamic Planning for 4x4 Grid World
 - Design
     - Write a scratch code
     - Policy Type: 1. Random Policy
@@ -14,7 +14,7 @@
     - Write a complete code
 
 
-### [N-step TD] N-step TD Learning for 4x4 Gid World
+### [N-step TD] N-step TD Learning for 4x4 Grid World
 - Design
     - Write a scratch code
     - Policy Type: 1. Random Policy
