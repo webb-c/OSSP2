@@ -38,7 +38,7 @@ def parge_opt(known=False):
     parser.add_argument("-a", "--alpha", type=float, default=0.001, help="alpha")
     # data save?
     parser.add_argument("-r","--isRepeat", type=str2bool, default=False, help="do you want't repeat experiment 100 tiems?")
-    parser.add_argument("-d", "--isSave", type=str2bool, default=True, help="do you want save a value table?")
+    parser.add_argument("-d", "--isSave", type=str2bool, default=False, help="do you want save a value table?")
     return parser.parse_known_args()[0] if known else parser.parse_args()
 
 
