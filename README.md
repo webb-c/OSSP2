@@ -38,6 +38,12 @@
 - 아래 요구사항을 코딩하여 .py 또는 .ipynb 형태로 제출
 - 코드는 바로 실행되도록 제출(에러 발생 시 감점 요인)
 
+#### figure 설명
+- 1. 에피소드 변화 별 MC, n-step TD 수렴값과 정답과의 차이 (episode 100, 1000, 100000) 
+- 2. 최종 수렴한 state value의 각 state 별 MC, TD의 데이터 분포 (Box plot)
+- 3. 에피소드 변화 별 MC, TD 학습시 state value의 변화 
+- 4. alpha 값에 따른 MC 학습 과정과 최종 수렴값의 변화
+
 <br>
 
 
